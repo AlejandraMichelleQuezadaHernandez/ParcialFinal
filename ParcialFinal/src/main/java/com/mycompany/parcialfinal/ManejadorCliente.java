@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class ManejadorCliente implements Runnable{
     private Socket socket; 
@@ -18,10 +19,11 @@ public class ManejadorCliente implements Runnable{
     }
     @Override
     public void run(){
+        String nombre = "Desconocido";
         try{
             BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
-            String nombre = entrada.readLine();
+            nombre = entrada.readLine();
             int numero = Integer.parseInt(entrada.readLine());
             int cuadrado = numero * numero;
             System.out.println("Cliente " + nombre + "conectado.");
@@ -33,6 +35,7 @@ public class ManejadorCliente implements Runnable{
         }catch(IOException | NumberFormatException e){
             System.out.println("Error con cliente: " + e.getMessage());
         }finally{
+            System.out.println("Cliente " + nombre + "desconectado.");
             try{
                 socket.close();
             }catch(IOException e){
