@@ -24,14 +24,14 @@ public class ManejadorCliente implements Runnable{
             BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
             nombre = entrada.readLine();
+            System.out.println("Cliente " + nombre + "conectado.");
             int numero = Integer.parseInt(entrada.readLine());
             int cuadrado = numero * numero;
-            System.out.println("Cliente " + nombre + "conectado.");
-            String fecha_hora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss"));
+            String fecha_hora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             salida.println("¡Bienvenido, " + nombre + "!");
             salida.println("El cuadrado del número recibido: " + cuadrado);
             salida.println("La fecha y la hora actual del servidor: " + fecha_hora);
-            System.out.println("Cliente " + nombre + "desconectado.");
+        
         }catch(IOException | NumberFormatException e){
             System.out.println("Error con cliente: " + e.getMessage());
         }finally{
