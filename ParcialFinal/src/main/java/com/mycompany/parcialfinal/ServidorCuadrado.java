@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServidorCuadrado extends Thread {
+public class ServidorCuadrado {
     
     public static void main(String[] args) {
         int puerto = 5000;
